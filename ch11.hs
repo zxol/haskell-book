@@ -39,7 +39,9 @@ printExpr (Add a b) = printExpr a ++ " + " ++ printExpr b
 asPatternTest :: (Int, Int) -> Int
 asPatternTest n@(a,b) = a * b
 
-
+isSubsequenceOf :: (Eq a) => [a] -> [a] -> Bool
+isSubsequenceOf [] _ = True
+isSubsequenceOf a@(x:xs) b@(y:ys) = 
 
 main =
   do
