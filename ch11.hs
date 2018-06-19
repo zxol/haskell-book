@@ -1,3 +1,4 @@
+import Data.Char
 import Data.String
 
 data BinaryTree a =
@@ -41,7 +42,17 @@ asPatternTest n@(a,b) = a * b
 
 isSubsequenceOf :: (Eq a) => [a] -> [a] -> Bool
 isSubsequenceOf [] _ = True
-isSubsequenceOf xs ys = True
+isSubsequenceOf _ [] = False
+isSubsequenceOf a@(x:xs) (y:ys)
+  | x == y = isSubsequenceOf xs ys
+  | otherwise = isSubsequenceOf a ys
+
+capitalizeWords :: String -> [(String, String)]
+capitalizeWords [] = []
+capitalizeWords s = map go $ words s
+  where
+    go s@(x:xs) = (s, toUpper x : xs)
+
 
 -- testingHlint :: Int -> Int -> Bool
 -- testingHlint a b = (a -- b)
