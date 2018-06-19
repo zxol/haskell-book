@@ -1,3 +1,5 @@
+import Data.String
+
 data BinaryTree a =
     Leaf
     | Node (BinaryTree a) a (BinaryTree a)
@@ -24,6 +26,20 @@ mapOkay =
     if mapTree (+1) testTree' == mapExpected
     then print "yup okay!"
     else error "test failed!"
+
+data Expr = Lit Integer | Add Expr Expr
+eval :: Expr -> Integer
+eval (Lit i) = i
+eval (Add a b) = eval a + eval b
+
+printExpr :: Expr -> String
+printExpr (Lit i) = show i
+printExpr (Add a b) = printExpr a ++ " + " ++ printExpr b
+
+asPatternTest :: (Int, Int) -> Int
+asPatternTest n@(a,b) = a * b
+
+
 
 main =
   do
