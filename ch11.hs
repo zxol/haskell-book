@@ -41,7 +41,10 @@ asPatternTest n@(a,b) = a * b
 
 isSubsequenceOf :: (Eq a) => [a] -> [a] -> Bool
 isSubsequenceOf [] _ = True
-isSubsequenceOf a@(x:xs) b@(y:ys) = 
+isSubsequenceOf xs ys = True
+
+-- testingHlint :: Int -> Int -> Bool
+-- testingHlint a b = (a -- b)
 
 main =
   do

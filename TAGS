@@ -1,0 +1,72 @@
+
+./ch11.hs,606
+data BinaryTree BinaryTree2,3
+    LeafLeaf3,4
+    | Node Node4,5
+insert insert7,8
+insert insert8,9
+mapTree mapTree14,15
+mapTree mapTree15,16
+testTree' testTree'18,19
+testTree' testTree'19,20
+mapExpected mapExpected21,22
+mapOkay mapOkay24,25
+data Expr Expr29,30
+data Expr = Lit Lit29,30
+data Expr = Lit Integer | Add Add29,30
+eval eval30,31
+eval eval31,32
+printExpr printExpr34,35
+printExpr printExpr35,36
+asPatternTest asPatternTest38,39
+asPatternTest asPatternTest39,40
+isSubsequenceOf isSubsequenceOf41,42
+isSubsequenceOf isSubsequenceOf42,43
+main main45,46
+
+./ch09.hs,617
+filterUppercase filterUppercase2,3
+capitaliseFirstLetter capitaliseFirstLetter4,5
+capitaliseAll capitaliseAll7,8
+pfHeadCaps pfHeadCaps9,10
+myAnd myAnd12,13
+myAnd myAnd13,14
+myOr myOr16,17
+myOr myOr17,18
+myAny myAny20,21
+myAny myAny21,22
+myElem myElem24,25
+myElem myElem25,26
+myReverse myReverse28,29
+myReverse myReverse29,30
+myReverseEfficient myReverseEfficient32,33
+myReverseEfficient myReverseEfficient33,34
+squish squish36,37
+squish squish37,38
+squishEfficient squishEfficient40,41
+squishEfficient squishEfficient41,42
+squishMap squishMap43,44
+squishMap squishMap44,45
+
+./ch10.hs,489
+alltrue alltrue2,3
+allfalse allfalse3,4
+halfhalf halfhalf4,5
+myAnd myAnd7,8
+myAnd myAnd8,9
+myOr myOr10,11
+myOr myOr11,12
+myAny myAny13,14
+myAny myAny14,15
+myElem myElem16,17
+myElem myElem17,18
+myReverse myReverse19,20
+myReverse myReverse20,21
+squish squish22,23
+squish squish23,24
+squishMap squishMap25,26
+squishMap squishMap26,27
+squishAgain squishAgain28,29
+squishAgain squishAgain29,30
+myMaximumBy myMaximumBy31,32
+myMaximumBy myMaximumBy32,33
