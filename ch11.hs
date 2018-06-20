@@ -1,6 +1,9 @@
 import Data.Char
 import Data.String
 
+import Prelude hiding (lookup)
+import Data.Map
+
 data BinaryTree a =
     Leaf
     | Node (BinaryTree a) a (BinaryTree a)
@@ -53,9 +56,47 @@ capitalizeWords s = map go $ words s
   where
     go s@(x:xs) = (s, toUpper x : xs)
 
+capitalizeWord :: String -> String
+capitalizeWord "" = ""
+capitalizeWord (x:xs) = toUpper x : xs
 
--- testingHlint :: Int -> Int -> Bool
--- testingHlint a b = (a -- b)
+capitalizePara :: String -> String
+capitalizePara sent = concat $ go allWords
+  where
+    allWords = words $ capitalizeWord sent
+    go (x:xs)
+      | null xs = []
+      | last x == '.' =x : go (" " : capitalizeWord (head xs) : tail xs)
+      | otherwise =x : " " : go xs
+
+data DaPhone = DaPhone [String]
+
+convo :: [String]
+convo =
+  ["Wanna play 20 questions",
+    "Ya",
+    "U 1st haha",
+    "Lol ok. Have u ever tasted alcohol lol",
+    "Lol ya",
+    "Wow ur cool haha. Ur turn",
+    "Ok. Do u think I am pretty Lol",
+    "Lol ya",
+    "Haha thanks just making sure rofl ur turn"]
+
+keymap = fromList([
+                     ('1', "1"),
+                     ('2', "abc2"),
+                     ('3', "def3"),
+                     ('4', "ghi4"),
+                     ('5', "jkl5"),
+                     ('6', "mno6"),
+                     ('7', "pqrs7"),
+                     ('8', "tuv8"),
+                     ('9', "wzyz9"),
+                     ('*', "^"),
+                     ('0', "+_0"),
+                     ('#', ".,#")
+                  ])
 
 main =
   do
