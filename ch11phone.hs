@@ -67,6 +67,11 @@ howToTypeCharacterLiteral c = concatMap go $ howToTypeCharacter c
 howToTypeMessageLiteral :: String -> String
 howToTypeMessageLiteral = concatMap howToTypeCharacterLiteral
 
+-- Testing
+
+convoTestLiteral :: [String] -> [String]
+convoTestLiteral = map howToTypeMessageLiteral
+
 main =
   do
     print "hello"
