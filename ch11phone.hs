@@ -15,6 +15,21 @@ convo =
 data Key = Key0 | Key1 | Key2 | Key3 | Key4 | Key5 | Key6 | Key7 | Key8 | Key9 | KeyStar | KeyPound
 type Taps = Integer
 
+keymap = [
+  (Key1, ['1']),
+  (Key2, ['abc2']),
+  (Key3, ['def3']),
+  (Key4, ['ghi4']),
+  (Key5, ['jkl5']),
+  (Key6, ['mno6']),
+  (Key7, ['pqrs7']),
+  (Key8, ['tuv8']),
+  (Key9, ['wxyz9']),
+  (KeyPound, ['.,']),
+  (KeyStar, ['*']),
+  (Key0, ['1']),
+  (Key0, ['1'])
+  ]
 
 typingInverse :: Char -> [(Key, Taps)]
 typingInverse 'a' = [(Key1, 1)]
