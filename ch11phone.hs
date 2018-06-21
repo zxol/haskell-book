@@ -62,9 +62,22 @@ howToTypeMessageLiteral = concatMap howToTypeCharacterLiteral
 howManyPressesFor :: String -> NumPresses
 howManyPressesFor = foldl (\x y -> x + snd y) 0 . howToTypeMessage
 
-mostPopularLetter :: String -> Char
-mostPopularLetter = head . maximumBy (compare `on` length) . group . sort
+mostPopularLetterGroup :: String -> String
+mostPopularLetterGroup = maximumBy (compare `on` length) . group . sort . filter (/=' ')
 
+mostPopularLetterCount :: String -> Int
+mostPopularLetterCount = length . mostPopularLetterGroup
+
+mostPopularLetterCost :: String -> Int
+mostPopularLetterCost = howManyPressesFor . mostPopularLetterGroup
+
+mostPopularLetter :: String -> Char
+mostPopularLetter = head . mostPopularLetterGroup
+
+coolestLetter :: [String] -> Char
+coolestLetter = mostPopularLetter . concat
+
+  
 -- Testing 
 
 convo :: [String]
