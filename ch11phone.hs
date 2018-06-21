@@ -62,6 +62,9 @@ howToTypeMessageLiteral = concatMap howToTypeCharacterLiteral
 howManyPressesFor :: String -> NumPresses
 howManyPressesFor = foldl (\x y -> x + snd y) 0 . howToTypeMessage
 
+mostPopular :: Ord a => [a] -> [a]
+mostPopular = maximumBy (compare `on` length) . group . sort 
+
 mostPopularLetterGroup :: String -> String
 mostPopularLetterGroup = maximumBy (compare `on` length) . group . sort . filter (/=' ')
 
@@ -77,7 +80,10 @@ mostPopularLetter = head . mostPopularLetterGroup
 coolestLetter :: [String] -> Char
 coolestLetter = mostPopularLetter . concat
 
-  
+coolestWord :: [String] -> String
+coolestWord = head . maximumBy (compare `on` length) . group . sort . words . concat
+
+   
 -- Testing 
 
 convo :: [String]
