@@ -49,11 +49,16 @@ isVowel c
   | toLower c == 'u' = True
 isVowel _ = False
 
+isConsonant :: Char -> Bool
+isConsonant c
+  | isAlpha c && isAscii c && not (isVowel c) = True
+  | otherwise = False
+
 countF :: (a -> Bool) -> [a] -> Int
 countF f xs = foldl (\acc a -> acc + fromEnum (f a) ) 0 xs
 
 count :: (a -> Bool) -> [a] -> Int
-count f xs = sum . map (fromEnum . f) xs
+count f xs = sum $ map (fromEnum . f) xs
 
 countTrue :: [Bool] -> Int
 countTrue = count id
@@ -62,8 +67,7 @@ pairs :: [a] -> [(a,a)]
 pairs a = zip (a) (tail a)
 
 theBeforeVowel :: (String, String) -> Bool
-theBeforeVowel ([],[]) = False
-theBeforeVowel (a,[]) = False
+theBeforeVowel (_,[]) = False
 theBeforeVowel (a,b)
   | a == "the" && (isVowel (head b)) = True
   | otherwise = False
@@ -78,9 +82,30 @@ countTheBeforeVowel2 s = go (words s)
   where
     go (x:xs)
       | xs == [] = 0
-      | x == "the" && (isVowel (head $ head xs)) = 1 + go xs
+      | x == "the" && isVowel (head $ head xs) = 1 + go xs
       | otherwise = go xs
 
+countVowels :: String -> Int
+countVowels = length . filter isVowel
 
-main = do
-  print "hello"
+newtype Word' = Word' String deriving (Eq, Show)
+vowels = "aeiou"
+
+mkWord :: String -> Maybe Word'
+mkWord s | numVowels < numConsonants = Just (Word' s)
+         | otherwise = Nothing
+  where
+    numConsonants = count isConsonant s
+    numVowels = count isVowel s
+
+data Nat = Zero | Succ Nat deriving (Eq, Show)
+
+integerToNat :: Int -> Nat
+integerToNat 0 = Zero
+integerToNat n = Succ $ integerToNat (n-1)
+
+natTointger :: Nat -> Int
+natTointger Zero = 0
+natTointger (Succ a) = 1 + natTointger a
+
+main = print "hello"
