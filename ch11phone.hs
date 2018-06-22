@@ -63,10 +63,10 @@ howManyPressesFor :: String -> NumPresses
 howManyPressesFor = foldl (\x y -> x + snd y) 0 . howToTypeMessage
 
 mostPopular :: Ord a => [a] -> [a]
-mostPopular = maximumBy (compare `on` length) . group . sort 
+mostPopular = maximumBy (compare `on` length) . group . sort
 
 mostPopularLetterGroup :: String -> String
-mostPopularLetterGroup = maximumBy (compare `on` length) . group . sort . filter (/=' ')
+mostPopularLetterGroup = mostPopular . filter (/=' ')
 
 mostPopularLetterCount :: String -> Int
 mostPopularLetterCount = length . mostPopularLetterGroup
@@ -81,10 +81,9 @@ coolestLetter :: [String] -> Char
 coolestLetter = mostPopularLetter . concat
 
 coolestWord :: [String] -> String
-coolestWord = head . maximumBy (compare `on` length) . group . sort . words . concat
+coolestWord = head . mostPopular . words . concat
 
-   
--- Testing 
+-- Testing
 
 convo :: [String]
 convo =
