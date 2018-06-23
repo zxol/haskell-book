@@ -1,7 +1,7 @@
 import Data.Maybe
 import Data.Char
 
--- data Maybe a = Nothing | Just a
+  -- data Maybe a = Nothing | Just a
 
 ifEvenAdd2 n = if even n then Just(n+2) else Nothing
 
@@ -108,4 +108,81 @@ natTointger :: Nat -> Int
 natTointger Zero = 0
 natTointger (Succ a) = 1 + natTointger a
 
+isJust' :: Maybe a -> Bool
+isJust' (Just a) = True
+isJust' Nothing = False
+
+isNothing' :: Maybe a -> Bool
+isNothing' = not . isJust'
+
+mayybee :: b -> (a -> b) -> Maybe a -> b
+mayybee _ f (Just b) = f b
+mayybee a _ Nothing = a
+
+fromMaybe :: a -> Maybe a -> a
+fromMaybe _ (Just b) = b
+fromMaybe a Nothing = a
+
+listToMaybe :: [a] -> Maybe a
+listToMaybe [] = Nothing
+listToMaybe xs = Just (head xs)
+
+maybeToList :: Maybe a -> [a]
+maybeToList (Just a) = [a]
+maybeToList Nothing = []
+
+catMaybes' :: [Maybe a] -> [a]
+catMaybes' [] = []
+catMaybes' (x:xs) = case x of
+                      Just a -> a : catMaybes' xs
+                      Nothing  -> catMaybes' xs
+
+containsANothing :: [Maybe a] -> Bool
+containsANothing xs
+  | nothingCount > 0 = True
+  | otherwise = False
+  where
+    nothingCount = length $ filter isNothing' xs
+
+flipMaybe :: [Maybe a] -> Maybe [a]
+flipMaybe xs
+  | containsANothing xs = Nothing
+  | otherwise = Just (catMaybes' xs)
+
+lefts' :: [Either a b] -> [a]
+lefts' [] = []
+lefts' (x:xs) = case x of
+                  Left a -> a : lefts' xs
+                  Right _ -> lefts' xs
+
+leftsF :: [Either a b] -> [a]
+leftsF = foldr go []
+  where
+    go x xs = case x of
+                  Left a -> a : xs
+                  Right _ -> xs
+
+rightsF :: [Either a b] -> [b]
+rightsF = foldr go []
+  where
+    go x xs = case x of
+                  Right a -> a : xs
+                  Left _ -> xs
+
+partitionEithers :: [Either a b] -> ([a], [b])
+partitionEithers xs = (leftsF xs, rightsF xs)
+
+eitherMaybe :: (b -> c) -> Either a b -> Maybe c
+eitherMaybe f (Right g) = Just (f g)
+eitherMaybe _ (Left _) = Nothing
+
+either' :: (a -> c) -> (b -> c) -> Either a b -> c
+either' f _ (Left a) = f a
+either' _ f (Right a) = f a
+
+eitherMaybe' :: (b -> c) -> Either a b -> Maybe c
+eitherMaybe' f a = either' (const Nothing) (Just . f) a
+
+
+-- leftsF = foldr (\x xs -> if left x then x : xs else xs)
 main = print "hello"
