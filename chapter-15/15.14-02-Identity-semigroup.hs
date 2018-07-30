@@ -2,17 +2,17 @@
 import Data.Semigroup
 import Test.QuickCheck
 
-data Trivial = Trivial deriving (Eq, Show)
+data Identity a = Identity a deriving (Eq, Show)
 
-instance Semigroup Trivial where
-  (<>) _ _ = Trivial
+instance Semigroup (Identity a) where
+  (<>) _ _ = Identity
 
-instance Arbitrary Trivial where
-  arbitrary = return Trivial
+instance Arbitrary Identity where
+  arbitrary = return Identity
 
 semigroupAssoc :: (Eq m, Semigroup m) => m -> m -> m -> Bool
 semigroupAssoc a b c = (a <> (b <> c)) == ((a <> b) <> c)
 
-type TrivialAssoc = Trivial -> Trivial -> Trivial -> Bool
+type IdentityAssoc = Identity -> Identity -> Identity -> Bool
 
-main = quickCheck (semigroupAssoc :: TrivialAssoc)
+main = quickCheck (semigroupAssoc :: IdentityAssoc)
